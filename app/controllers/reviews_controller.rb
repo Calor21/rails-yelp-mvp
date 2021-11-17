@@ -6,7 +6,14 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review
+    @restaurant = Restaurant.new(restaurant_params)
+
+    if @restaurant.save
+      redirect_to @restaurant, notice: 'Restaurant was successfully created.'
+      # redirect_to restaurant_path(@restaurant)
+    else
+      render :new
+    end
   end
 
   def destroy
